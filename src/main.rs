@@ -64,6 +64,7 @@ async fn main() -> Result<()> {
         App::new()
             .wrap(middleware::Logger::default())
             .app_data(package_index.clone())
+            .app_data(web::PayloadConfig::new(10 * 1024 * 1024)) // 10MB
             .data(settings.clone())
             .configure(handlers::configure_routes)
     })
